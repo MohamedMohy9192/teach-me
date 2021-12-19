@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/courses_nav_graph"
+    app:startDestination="@id/coursesListFragment">
+
+    <fragment
+        android:id="@+id/coursesDetailFragment"
+        android:name="com.androidera.teachme.ui.CoursesDetailFragment"
+        android:label="CoursesDetailFragment" >
+        <action
+            android:id="@+id/action_coursesDetailFragment_to_coursesViewFragment"
+            app:destination="@id/coursesViewFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/coursesViewFragment"
+        android:name="com.androidera.teachme.ui.fragments.CoursesViewFragment"
+        android:label="CoursesViewFragment" />
+    <fragment
+        android:id="@+id/searchCoursesFragment"
+        android:name="com.androidera.teachme.ui.fragments.SearchCoursesFragment"
+        android:label="SearchCoursesFragment" >
+        <action
+            android:id="@+id/action_searchCoursesFragment_to_coursesDetailFragment"
+            app:destination="@id/coursesDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/savedCoursesFragment"
+        android:name="com.androidera.teachme.ui.fragments.SavedCoursesFragment"
+        android:label="fragment_saved_courses"
+        tools:layout="@layout/fragment_saved_courses" >
+        <action
+            android:id="@+id/action_savedCoursesFragment_to_coursesDetailFragment"
+            app:destination="@id/coursesDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/coursesListFragment"
+        android:name="com.androidera.teachme.ui.fragments.CoursesListFragment"
+        android:label="CoursesListFragment" >
+        <action
+            android:id="@+id/action_coursesListFragment_to_coursesDetailFragment"
+            app:destination="@id/coursesDetailFragment" />
+    </fragment>
+</navigation>
