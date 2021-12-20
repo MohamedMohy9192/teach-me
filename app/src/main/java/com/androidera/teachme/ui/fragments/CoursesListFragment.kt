@@ -1,30 +1,72 @@
 package com.androidera.teachme.ui.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
+import android.util.Log
 import android.view.View
-import android.view.ViewGroup
-import com.androidera.teachme.R
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.androidera.teachme.adapters.CoursesAdapter
+import com.androidera.teachme.databinding.FragmentCoursesListBinding
 import com.androidera.teachme.ui.CoursesActivity
 import com.androidera.teachme.ui.CoursesViewModel
+import com.androidera.teachme.util.Resource
 
 class CoursesListFragment : Fragment() {
 
     private lateinit var viewModel: CoursesViewModel
+    private var fragmentCoursesListBinding: FragmentCoursesListBinding? = null
+    private lateinit var coursesAdapter: CoursesAdapter
+
+    private val TAG = "CoursesListFragment"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = (activity as CoursesActivity).viewModel
+        val binding = FragmentCoursesListBinding.bind(view)
+        fragmentCoursesListBinding = binding
+
+        setupRecyclerView()
+
+        viewModel.courses.observe(viewLifecycleOwner, Observer { response ->
+            when (response) {
+                is Resource.Success -> {
+                    hideProgressBar()
+                    response.data?.let { coursesResponse ->
+                        coursesAdapter.differ.submitList(coursesResponse.results)
+
+                    }
+                }
+                is Resource.Error -> {
+                    hideProgressBar()
+                    response.message?.let { message ->
+                        Log.e(TAG, "An error occurred: $message")
+                    }
+                }
+                is Resource.Loading -> {
+                    showProgressBar()
+                }
+            }
+        })
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_courses_list, container, false)
+    private fun hideProgressBar() {
+        fragmentCoursesListBinding?.paginationProgressBar?.visibility = View.INVISIBLE
     }
 
+    private fun showProgressBar() {
+        fragmentCoursesListBinding?.paginationProgressBar?.visibility = View.VISIBLE
+    }
 
+    private fun setupRecyclerView() {
+        fragmentCoursesListBinding?.coursesRecyclerView?.apply {
+            adapter = coursesAdapter
+            layoutManager = LinearLayoutManager(activity)
+        }
+    }
+
+    override fun onDestroyView() {
+        fragmentCoursesListBinding = null
+        super.onDestroyView()
+    }
 }
