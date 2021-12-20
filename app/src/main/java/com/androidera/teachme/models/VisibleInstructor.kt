@@ -1,4 +1,4 @@
-package com.androidera.teachme
+package com.androidera.teachme.models
 
 data class VisibleInstructor(
     val _class: String,

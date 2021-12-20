@@ -1,10 +1,10 @@
-package com.androidera.teachme
+package com.androidera.teachme.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.androidera.teachme.R
 import com.androidera.teachme.databinding.ActivityCoursesBinding
 
 class CoursesActivity : AppCompatActivity() {

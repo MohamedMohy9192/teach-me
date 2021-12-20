@@ -1,4 +1,4 @@
-package com.androidera.teachme.ui
+package com.androidera.teachme.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

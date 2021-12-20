@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Teachme">
         <activity
-            android:name=".CoursesActivity"
+            android:name=".ui.CoursesActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

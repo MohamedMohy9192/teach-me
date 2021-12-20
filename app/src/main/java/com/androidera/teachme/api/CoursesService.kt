@@ -1,6 +1,6 @@
 package com.androidera.teachme.api
 
-import com.androidera.teachme.CoursesResponse
+import com.androidera.teachme.models.CoursesResponse
 import com.androidera.teachme.util.Constants.Companion.AUTHORIZATION
 import retrofit2.Response
 import retrofit2.http.GET

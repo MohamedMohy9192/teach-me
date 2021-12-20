@@ -1,10 +1,18 @@
-package com.androidera.teachme
+package com.androidera.teachme.models
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import com.androidera.teachme.models.VisibleInstructor
+
+@Entity(
+    tableName = "courses"
+)
 data class Result(
     val _class: String,
     val curriculum_items: List<Any>,
     val curriculum_lectures: List<Any>,
     val headline: String,
+    @PrimaryKey
     val id: Int,
     val image_125_H: String,
     val image_240x135: String,
