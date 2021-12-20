@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/coursesListFragment"
+        android:icon="@drawable/ic_article_24"
+        android:title="@string/nav_menu_item_courses" />
+    <item
+        android:id="@+id/savedCoursesFragment"
+        android:icon="@drawable/ic_baseline_favorite_24"
+        android:title="@string/nav_menu_item_saved_courses" />
+    <item
+        android:id="@+id/searchCoursesFragment"
+        android:icon="@drawable/ic_search_24"
+        android:title="@string/nav_menu_item_search_courses" />
+</menu>
