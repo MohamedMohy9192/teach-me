@@ -24,7 +24,7 @@ class CoursesAdapter : RecyclerView.Adapter<CoursesAdapter.CourseViewHolder>() {
 
     }
 
-    val differ = AsyncListDiffer(this, differCallback)
+    private val differ = AsyncListDiffer(this, differCallback)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CourseViewHolder {
         return CourseViewHolder(
