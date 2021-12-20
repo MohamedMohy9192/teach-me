@@ -22,9 +22,12 @@ class CoursesListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = (activity as CoursesActivity).viewModel
+
         val binding = FragmentCoursesListBinding.bind(view)
         fragmentCoursesListBinding = binding
+
+        viewModel = (activity as CoursesActivity).viewModel
+
 
         setupRecyclerView()
 
@@ -34,6 +37,7 @@ class CoursesListFragment : Fragment() {
                     hideProgressBar()
                     response.data?.let { coursesResponse ->
                         coursesAdapter.differ.submitList(coursesResponse.results)
+
 
                     }
                 }
@@ -59,6 +63,7 @@ class CoursesListFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
+        coursesAdapter = CoursesAdapter()
         fragmentCoursesListBinding?.coursesRecyclerView?.apply {
             adapter = coursesAdapter
             layoutManager = LinearLayoutManager(activity)

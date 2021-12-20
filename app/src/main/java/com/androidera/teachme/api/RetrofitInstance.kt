@@ -25,7 +25,7 @@ class RetrofitInstance {
 
         }
 
-        val udemyApi by lazy {
+        val udemyApi: CoursesService by lazy {
             retrofit.create(CoursesService::class.java)
         }
     }
