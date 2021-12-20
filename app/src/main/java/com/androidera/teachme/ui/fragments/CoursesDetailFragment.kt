@@ -9,6 +9,8 @@ import com.androidera.teachme.R
 
 class CoursesDetailFragment : Fragment() {
 
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

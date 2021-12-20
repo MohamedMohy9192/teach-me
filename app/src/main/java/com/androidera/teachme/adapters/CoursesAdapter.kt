@@ -39,7 +39,7 @@ class CoursesAdapter : RecyclerView.Adapter<CoursesAdapter.CourseViewHolder>() {
     override fun onBindViewHolder(holder: CourseViewHolder, position: Int) {
         val course = differ.currentList[position]
         holder.itemView.apply {
-            Glide.with(this).load(course.image_125_H).into(findViewById(R.id.course_image_view))
+            Glide.with(this).load(course.image_240x135).into(findViewById(R.id.course_image_view))
             findViewById<TextView>(R.id.course_title_text_view).text = course.title
             findViewById<TextView>(R.id.course_prince_text_view).text = course.price
             findViewById<TextView>(R.id.course_instructor_text_view).text =
