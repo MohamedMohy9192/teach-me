@@ -9,4 +9,8 @@ class CoursesRepository(
 
     suspend fun getCourses(pageNumber: Int, language: String) =
         RetrofitInstance.udemyApi.getCourses(pageNumber, language)
+
+    suspend fun searchCourses(pageNumber: Int, language: String, searchQuery: String) =
+        RetrofitInstance.udemyApi.searchForCourses(pageNumber, language, searchQuery)
+
 }
