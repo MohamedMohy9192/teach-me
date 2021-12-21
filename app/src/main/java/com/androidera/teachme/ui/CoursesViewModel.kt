@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.androidera.teachme.models.CoursesResponse
+import com.androidera.teachme.models.Result
 import com.androidera.teachme.repository.CoursesRepository
 import com.androidera.teachme.util.Resource
 import kotlinx.coroutines.launch
@@ -58,4 +59,15 @@ class CoursesViewModel(
         }
         return Resource.Error(response.message())
     }
+
+    fun saveCourse(course: Result) = viewModelScope.launch {
+        coursesRepository.insert(course)
+    }
+
+    fun getSavedCourses() = coursesRepository.getSavedCourses()
+
+    fun deleteCourse(course: Result) = viewModelScope.launch {
+        coursesRepository.deleteCourse(course)
+    }
+
 }

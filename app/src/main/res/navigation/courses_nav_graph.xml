@@ -9,24 +9,9 @@
         android:id="@+id/coursesDetailFragment"
         android:name="com.androidera.teachme.ui.fragments.CoursesDetailFragment"
         android:label="CoursesDetailFragment" >
-        <action
-            android:id="@+id/action_coursesDetailFragment_to_coursesViewFragment"
-            app:destination="@id/coursesViewFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
         <argument
             android:name="course"
             app:argType="com.androidera.teachme.models.Result" />
-    </fragment>
-    <fragment
-        android:id="@+id/coursesViewFragment"
-        android:name="com.androidera.teachme.ui.fragments.CoursesViewFragment"
-        android:label="CoursesViewFragment" >
-        <argument
-            android:name="courseUrl"
-            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/searchCoursesFragment"
