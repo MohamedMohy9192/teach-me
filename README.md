@@ -23,7 +23,6 @@ App displaying Udemy courses using [Udemy API](https://www.udemy.com/developers/
 
 ## Screenshots
 
-<img src="screenshots/Screenshot_1" alt="Home Screen" width="200"/> <img src="screenshots/Screenshot_2" alt="Details Screen" width="200"/> 
-<img src="screenshots/Screenshot_3" alt="Search Screen" width="200"/> <img src="screenshots/Screenshot_4" alt="Saved Courses Screen" width="200"/>
+<img src="screenshots/Screenshot_1.png" alt="Home Screen" width="200"/> <img src="screenshots/Screenshot_2.png" alt="Details Screen" width="200"/> <img src="screenshots/Screenshot_3.png" alt="Search Screen" width="200"/> <img src="screenshots/Screenshot_4.png" alt="Saved Courses Screen" width="200"/>
 
 
