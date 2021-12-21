@@ -8,10 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
+import com.androidera.teachme.R
 import com.androidera.teachme.databinding.FragmentCoursesDetailBinding
 import com.androidera.teachme.ui.CoursesActivity
 import com.androidera.teachme.ui.CoursesViewModel
 import com.androidera.teachme.util.Constants
+import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 
 class CoursesDetailFragment : Fragment() {
@@ -33,6 +35,15 @@ class CoursesDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = (activity as CoursesActivity).viewModel
         val course = args.course
+
+        Glide.with(this).load(course.image_480x270).into(binding.courseImage)
+        binding.courseDetailTitleTextView.text = course.title
+        binding.courseDetailPrinceTextView.text = course.price
+        binding.courseHeadlineTextView.text = course.headline
+        Glide.with(this).load(course.visible_instructors[0].image_100x100)
+            .into(binding.instructorImageView)
+        binding.instructorTitleTextView.text = course.visible_instructors[0].title
+        binding.instructorJobTitleTextView.text = course.visible_instructors[0].job_title
 
         binding.floatingActionButton.setOnClickListener {
             viewModel.saveCourse(course)
