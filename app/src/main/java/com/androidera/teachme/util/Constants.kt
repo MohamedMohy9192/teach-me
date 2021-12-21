@@ -10,6 +10,7 @@ class Constants {
         const val COURSE_BUNDLE_KEY = "course"
         const val COURSE_URL_KEY = "course_url"
         const val UDEMY_BASE_URL = "https://www.udemy.com"
+        const val QUERY_PAGE_SIZE = 12
     }
 
 

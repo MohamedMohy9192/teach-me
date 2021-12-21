@@ -18,10 +18,12 @@ class CoursesViewModel(
     val TAG = CoursesViewModel::class.simpleName
 
     val courses: MutableLiveData<Resource<CoursesResponse>> = MutableLiveData()
-    val coursesPage = 1
+    var coursesPage = 1
+    var coursesResponse: CoursesResponse? = null
 
     val searchCourses: MutableLiveData<Resource<CoursesResponse>> = MutableLiveData()
-    val searchCoursesPage = 1
+    var searchCoursesPage = 1
+    var searchCoursesResponse: CoursesResponse? = null
 
     init {
         getCourses("en")
@@ -43,8 +45,15 @@ class CoursesViewModel(
     private fun handleCoursesResponse(response: Response<CoursesResponse>): Resource<CoursesResponse> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
-                Log.d(TAG, "Response In ViewModel: handleCoursesResponse ${resultResponse.next}")
-                return Resource.Success(resultResponse)
+                coursesPage++
+                if (coursesResponse == null) {
+                    coursesResponse = resultResponse
+                } else {
+                    val oldCourses = coursesResponse?.results
+                    val newCourses = resultResponse.results
+                    oldCourses?.addAll(newCourses)
+                }
+                return Resource.Success(coursesResponse ?: resultResponse)
             }
         }
         return Resource.Error(response.message())
@@ -53,8 +62,15 @@ class CoursesViewModel(
     private fun handleSearchCoursesResponse(response: Response<CoursesResponse>): Resource<CoursesResponse> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
-                Log.d(TAG, "Response In ViewModel: handleCoursesResponse ${resultResponse.next}")
-                return Resource.Success(resultResponse)
+                searchCoursesPage++
+                if (searchCoursesResponse == null) {
+                    searchCoursesResponse = resultResponse
+                } else {
+                    val oldCourses = searchCoursesResponse?.results
+                    val newCourses = resultResponse.results
+                    oldCourses?.addAll(newCourses)
+                }
+                return Resource.Success(searchCoursesResponse ?: resultResponse)
             }
         }
         return Resource.Error(response.message())
