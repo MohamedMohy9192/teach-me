@@ -6,17 +6,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.androidera.teachme.R
 import com.androidera.teachme.adapters.CoursesAdapter
 import com.androidera.teachme.databinding.FragmentCoursesListBinding
 import com.androidera.teachme.ui.CoursesActivity
 import com.androidera.teachme.ui.CoursesViewModel
+import com.androidera.teachme.util.Constants.Companion.COURSE_BUNDLE_KEY
 import com.androidera.teachme.util.Resource
 
 class CoursesListFragment : Fragment() {
 
     private lateinit var viewModel: CoursesViewModel
-    private var _binding : FragmentCoursesListBinding? = null
+    private var _binding: FragmentCoursesListBinding? = null
     private val binding get() = _binding!!
     private lateinit var coursesAdapter: CoursesAdapter
 
@@ -34,8 +37,17 @@ class CoursesListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel = (activity as CoursesActivity).viewModel
-
         setupRecyclerView()
+
+        coursesAdapter.setOnCourseItemClickListener { course ->
+            val bundle = Bundle().apply {
+                putSerializable(COURSE_BUNDLE_KEY, course)
+            }
+            findNavController().navigate(
+                R.id.action_coursesListFragment_to_coursesDetailFragment,
+                bundle
+            )
+        }
 
         viewModel.courses.observe(viewLifecycleOwner, { response ->
             when (response) {
@@ -59,7 +71,7 @@ class CoursesListFragment : Fragment() {
     }
 
     private fun hideProgressBar() {
-       binding.paginationProgressBar.visibility = View.INVISIBLE
+        binding.paginationProgressBar.visibility = View.INVISIBLE
     }
 
     private fun showProgressBar() {

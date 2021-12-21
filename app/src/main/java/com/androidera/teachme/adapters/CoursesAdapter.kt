@@ -44,8 +44,10 @@ class CoursesAdapter : RecyclerView.Adapter<CoursesAdapter.CourseViewHolder>() {
             findViewById<TextView>(R.id.course_prince_text_view).text = course.price
             findViewById<TextView>(R.id.course_instructor_text_view).text =
                 course.visible_instructors[0].title
-            onCourseItemClickListener?.let {
-                it(course)
+            setOnClickListener {
+                onCourseItemClickListener?.let {
+                    it(course)
+                }
             }
         }
     }

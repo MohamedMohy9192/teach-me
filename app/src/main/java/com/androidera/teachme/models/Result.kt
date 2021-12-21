@@ -2,6 +2,7 @@ package com.androidera.teachme.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.io.Serializable
 
 @Entity(
     tableName = "courses"
@@ -23,4 +24,4 @@ data class Result(
     val tracking_id: String,
     val url: String,
     val visible_instructors: List<VisibleInstructor>
-)
+) : Serializable

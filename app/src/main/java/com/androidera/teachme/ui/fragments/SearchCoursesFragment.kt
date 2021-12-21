@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.androidera.teachme.R
 import com.androidera.teachme.adapters.CoursesAdapter
 import com.androidera.teachme.databinding.FragmentSearchCoursesBinding
 import com.androidera.teachme.ui.CoursesActivity
@@ -39,8 +41,17 @@ class SearchCoursesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = (activity as CoursesActivity).viewModel
-
         setupRecyclerView()
+
+        coursesAdapter.setOnCourseItemClickListener { course ->
+            val bundle = Bundle().apply {
+                putSerializable(Constants.COURSE_BUNDLE_KEY, course)
+            }
+            findNavController().navigate(
+                R.id.action_searchCoursesFragment_to_coursesDetailFragment,
+                bundle
+            )
+        }
 
         var job: Job? = null
         binding.searchInputEditText.editText?.addTextChangedListener { editable ->
