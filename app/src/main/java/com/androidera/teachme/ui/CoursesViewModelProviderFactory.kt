@@ -1,13 +1,15 @@
 package com.androidera.teachme.ui
 
+import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.androidera.teachme.repository.CoursesRepository
 
 class CoursesViewModelProviderFactory(
-    private val  coursesRepository: CoursesRepository
-): ViewModelProvider.Factory {
+    private val application: Application,
+    private val coursesRepository: CoursesRepository
+) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return CoursesViewModel(coursesRepository) as T
+        return CoursesViewModel(application, coursesRepository) as T
     }
 }

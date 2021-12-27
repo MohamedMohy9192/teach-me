@@ -21,7 +21,8 @@ class CoursesActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val coursesRepository = CoursesRepository(CoursesDatabase(this))
-        val viewModelProviderFactory = CoursesViewModelProviderFactory(coursesRepository)
+        val viewModelProviderFactory =
+            CoursesViewModelProviderFactory(application, coursesRepository)
         viewModel =
             ViewModelProvider(this, viewModelProviderFactory)[CoursesViewModel::class.java]
 

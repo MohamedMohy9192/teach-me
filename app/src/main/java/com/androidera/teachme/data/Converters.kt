@@ -7,7 +7,7 @@ import com.google.gson.Gson
 class Converters {
 
     @TypeConverter
-    fun instructorListToJson(value: List<VisibleInstructor>) = Gson().toJson(value)
+    fun instructorListToJson(value: List<VisibleInstructor>): String = Gson().toJson(value)
 
     @TypeConverter
     fun jsonToInstructorList(value: String) =
