@@ -17,6 +17,7 @@ import com.androidera.teachme.repository.CoursesRepository
 import com.androidera.teachme.util.Resource
 import kotlinx.coroutines.launch
 import retrofit2.Response
+import java.io.IOException
 
 class CoursesViewModel(
     application: Application,
@@ -38,16 +39,11 @@ class CoursesViewModel(
     }
 
     fun getCourses(language: String) = viewModelScope.launch {
-        courses.postValue(Resource.Loading())
-        val response = coursesRepository.getCourses(coursesPage, language)
-        Log.d(TAG, "Response In ViewModel: getCourses ${response.body()?.next}")
-        courses.postValue(handleCoursesResponse(response))
+        safeCoursesCall(language)
     }
 
     fun searchCourses(language: String, searchQuery: String) = viewModelScope.launch {
-        searchCourses.postValue(Resource.Loading())
-        val response = coursesRepository.searchCourses(searchCoursesPage, language, searchQuery)
-        searchCourses.postValue(handleSearchCoursesResponse(response))
+       safeSearchCoursesCall(language, searchQuery)
     }
 
     private fun handleCoursesResponse(response: Response<CoursesResponse>): Resource<CoursesResponse> {
@@ -94,6 +90,41 @@ class CoursesViewModel(
         coursesRepository.deleteCourse(course)
     }
 
+    private suspend fun safeCoursesCall(language: String) {
+        courses.postValue(Resource.Loading())
+        try {
+            if (hasInternetConnection()) {
+                val response = coursesRepository.getCourses(coursesPage, language)
+                Log.d(TAG, "Response In ViewModel: getCourses ${response.body()?.next}")
+                courses.postValue(handleCoursesResponse(response))
+            } else {
+                courses.postValue(Resource.Error("No internet connection"))
+            }
+        } catch (t: Throwable) {
+            when (t) {
+                is IOException -> courses.postValue(Resource.Error("Network Failure"))
+                else -> courses.postValue(Resource.Error("Conversion Error"))
+            }
+        }
+    }
+
+    private suspend fun safeSearchCoursesCall(language: String, searchQuery: String) {
+        searchCourses.postValue(Resource.Loading())
+        try {
+            if (hasInternetConnection()) {
+                val response =
+                    coursesRepository.searchCourses(searchCoursesPage, language, searchQuery)
+                searchCourses.postValue(handleSearchCoursesResponse(response))
+            } else {
+                searchCourses.postValue(Resource.Error("No internet connection"))
+            }
+        } catch (t: Throwable) {
+            when (t) {
+                is IOException -> searchCourses.postValue(Resource.Error("Network Failure"))
+                else -> searchCourses.postValue(Resource.Error("Conversion Error"))
+            }
+        }
+    }
 
 
     private fun hasInternetConnection(): Boolean {
