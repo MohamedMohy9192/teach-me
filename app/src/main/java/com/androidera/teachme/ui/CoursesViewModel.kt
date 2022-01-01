@@ -33,6 +33,8 @@ class CoursesViewModel(
     val searchCourses: MutableLiveData<Resource<CoursesResponse>> = MutableLiveData()
     var searchCoursesPage = 1
     var searchCoursesResponse: CoursesResponse? = null
+    var newSearchQuery: String? = null
+    var oldSearchQuery: String? = null
 
     init {
         getCourses("en")
@@ -43,7 +45,7 @@ class CoursesViewModel(
     }
 
     fun searchCourses(language: String, searchQuery: String) = viewModelScope.launch {
-       safeSearchCoursesCall(language, searchQuery)
+        safeSearchCoursesCall(language, searchQuery)
     }
 
     private fun handleCoursesResponse(response: Response<CoursesResponse>): Resource<CoursesResponse> {
@@ -66,10 +68,13 @@ class CoursesViewModel(
     private fun handleSearchCoursesResponse(response: Response<CoursesResponse>): Resource<CoursesResponse> {
         if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
-                searchCoursesPage++
-                if (searchCoursesResponse == null) {
+
+                if (searchCoursesResponse == null || newSearchQuery != oldSearchQuery) {
+                    searchCoursesPage = 1
+                    oldSearchQuery = newSearchQuery
                     searchCoursesResponse = resultResponse
                 } else {
+                    searchCoursesPage++
                     val oldCourses = searchCoursesResponse?.results
                     val newCourses = resultResponse.results
                     oldCourses?.addAll(newCourses)
