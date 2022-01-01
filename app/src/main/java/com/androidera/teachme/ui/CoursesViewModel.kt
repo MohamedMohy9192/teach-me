@@ -114,6 +114,7 @@ class CoursesViewModel(
     }
 
     private suspend fun safeSearchCoursesCall(language: String, searchQuery: String) {
+        newSearchQuery = searchQuery
         searchCourses.postValue(Resource.Loading())
         try {
             if (hasInternetConnection()) {
