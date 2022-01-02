@@ -73,6 +73,7 @@ class SearchCoursesFragment : Fragment() {
             when (response) {
                 is Resource.Success -> {
                     hideProgressBar()
+                    hideErrorMessage()
                     response.data?.let { coursesResponse ->
                         coursesAdapter.differ.submitList(coursesResponse.results.toList())
                         val totalPages = coursesResponse.count / Constants.QUERY_PAGE_SIZE + 2
@@ -87,6 +88,7 @@ class SearchCoursesFragment : Fragment() {
                     response.message?.let { message ->
                         Toast.makeText(activity, "An error occurred: $message", Toast.LENGTH_LONG)
                             .show()
+                        showErrorMessage(message)
                     }
                 }
                 is Resource.Loading -> {
@@ -94,6 +96,14 @@ class SearchCoursesFragment : Fragment() {
                 }
             }
         })
+
+        binding.errorMessageView.retryBottom.setOnClickListener {
+            if (binding.searchInputEditText.editText?.text.toString().isNotEmpty()) {
+                viewModel.searchCourses("en", binding.searchInputEditText.editText?.text.toString())
+            } else {
+                hideErrorMessage()
+            }
+        }
     }
 
     private fun hideProgressBar() {
@@ -106,6 +116,18 @@ class SearchCoursesFragment : Fragment() {
         isLoading = true
     }
 
+    private fun hideErrorMessage() {
+        binding.errorMessageView.errorMessageCardView.visibility = View.INVISIBLE
+        isError = false
+    }
+
+    private fun showErrorMessage(message: String) {
+        binding.errorMessageView.errorMessageCardView.visibility = View.VISIBLE
+        binding.errorMessageView.errorMessageTextView.text = message
+        isError = true
+    }
+
+    var isError = false
     var isLoading = false
     var isLastPage = false
     var isScrolling = false
@@ -118,12 +140,14 @@ class SearchCoursesFragment : Fragment() {
             val visibleItemCount = layoutManager.childCount
             val totalItemCount = layoutManager.itemCount
 
+            val isNoErrors = !isError
             val isNotLoadingAndNotLastPage = !isLoading && !isLastPage
             val isAtLastItem = firstVisibleItemPosition + visibleItemCount >= totalItemCount
             val isNotAtBeginning = firstVisibleItemPosition >= 0
             val isTotalMoreThanVisible = totalItemCount >= Constants.QUERY_PAGE_SIZE
-            val shouldPaginate = isNotLoadingAndNotLastPage && isAtLastItem && isNotAtBeginning &&
-                    isTotalMoreThanVisible && isScrolling
+            val shouldPaginate =
+                isNoErrors && isNotLoadingAndNotLastPage && isAtLastItem && isNotAtBeginning &&
+                        isTotalMoreThanVisible && isScrolling
             if (shouldPaginate) {
                 viewModel.searchCourses(
                     "en",
