@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/coursesDetailFragment"
         android:name="com.androidera.teachme.ui.fragments.CoursesDetailFragment"
-        android:label="CoursesDetailFragment" >
+        android:label="Courses Details" >
         <argument
             android:name="course"
             app:argType="com.androidera.teachme.models.Result" />
@@ -16,7 +16,7 @@
     <fragment
         android:id="@+id/searchCoursesFragment"
         android:name="com.androidera.teachme.ui.fragments.SearchCoursesFragment"
-        android:label="SearchCoursesFragment" >
+        android:label="Search Courses" >
         <action
             android:id="@+id/action_searchCoursesFragment_to_coursesDetailFragment"
             app:destination="@id/coursesDetailFragment"
@@ -28,7 +28,7 @@
     <fragment
         android:id="@+id/savedCoursesFragment"
         android:name="com.androidera.teachme.ui.fragments.SavedCoursesFragment"
-        android:label="fragment_saved_courses"
+        android:label="My Courses"
         tools:layout="@layout/fragment_saved_courses" >
         <action
             android:id="@+id/action_savedCoursesFragment_to_coursesDetailFragment"
@@ -41,7 +41,7 @@
     <fragment
         android:id="@+id/coursesListFragment"
         android:name="com.androidera.teachme.ui.fragments.CoursesListFragment"
-        android:label="CoursesListFragment" >
+        android:label="Browse Courses" >
         <action
             android:id="@+id/action_coursesListFragment_to_coursesDetailFragment"
             app:destination="@id/coursesDetailFragment"
