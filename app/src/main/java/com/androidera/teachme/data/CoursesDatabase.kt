@@ -8,13 +8,14 @@ import androidx.room.TypeConverters
 import com.androidera.teachme.models.Result
 
 @Database(
-    entities = [Result::class],
+    entities = [Result::class, com.androidera.teachme.models.review.Result::class],
     version = 1
 )
 @TypeConverters(Converters::class)
 abstract class CoursesDatabase : RoomDatabase() {
 
     abstract fun getCoursesDao(): CoursesDao
+    abstract fun getReviewsDao(): ReviewDao
 
     companion object {
         @Volatile
