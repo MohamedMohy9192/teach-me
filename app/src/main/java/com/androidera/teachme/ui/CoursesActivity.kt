@@ -12,7 +12,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.androidera.teachme.R
 import com.androidera.teachme.data.CoursesDatabase
 import com.androidera.teachme.databinding.ActivityCoursesBinding
-import com.androidera.teachme.repository.CoursesRepository
+import com.androidera.teachme.repository.UdemyRepository
 
 class CoursesActivity : AppCompatActivity() {
 
@@ -26,7 +26,7 @@ class CoursesActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        val coursesRepository = CoursesRepository(CoursesDatabase(this))
+        val coursesRepository = UdemyRepository(CoursesDatabase(this))
         val viewModelProviderFactory =
             CoursesViewModelProviderFactory(application, coursesRepository)
         viewModel =

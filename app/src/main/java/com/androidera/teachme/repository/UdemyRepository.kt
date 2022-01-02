@@ -4,7 +4,7 @@ import com.androidera.teachme.api.RetrofitInstance
 import com.androidera.teachme.data.CoursesDatabase
 import com.androidera.teachme.models.Result
 
-class CoursesRepository(
+class UdemyRepository(
     val coursesDatabase: CoursesDatabase
 ) {
 

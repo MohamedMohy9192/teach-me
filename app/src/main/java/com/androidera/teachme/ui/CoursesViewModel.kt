@@ -13,7 +13,7 @@ import androidx.lifecycle.viewModelScope
 import com.androidera.teachme.CoursesApplication
 import com.androidera.teachme.models.CoursesResponse
 import com.androidera.teachme.models.Result
-import com.androidera.teachme.repository.CoursesRepository
+import com.androidera.teachme.repository.UdemyRepository
 import com.androidera.teachme.util.Resource
 import kotlinx.coroutines.launch
 import retrofit2.Response
@@ -21,7 +21,7 @@ import java.io.IOException
 
 class CoursesViewModel(
     application: Application,
-    val coursesRepository: CoursesRepository
+    val coursesRepository: UdemyRepository
 ) : AndroidViewModel(application) {
 
     val TAG = CoursesViewModel::class.simpleName
