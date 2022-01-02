@@ -14,5 +14,5 @@ interface ReviewDao {
     suspend fun insertCourseReviews(reviews: List<Result>)
 
     @Query("SELECT * FROM reviews")
-    suspend fun getCourseReviews(): LiveData<List<Result>>
+     fun getCourseReviews(): LiveData<List<Result>>
 }

@@ -6,7 +6,7 @@
     <string name="nav_menu_item_saved_courses">Saved Courses</string>
     <string name="nav_menu_item_search_courses">Search Courses</string>
     <string name="course_image_preview_content_description">Course image preview</string>
-    <string name="search_input_hint">Search</string>
+    <string name="search_input_hint">Search Courses</string>
     <string name="save_course_button_content_description">Save Course Button</string>
     <string name="instructor_image">Instructor Image</string>
     <string name="course_image">Course Image</string>
