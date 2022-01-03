@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 @Entity(
     tableName = "reviews"
 )
-data class Result(
+data class Review(
     val _class: String,
     val content: String,
     val created: String,

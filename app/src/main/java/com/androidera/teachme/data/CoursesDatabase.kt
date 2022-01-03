@@ -6,9 +6,10 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.androidera.teachme.models.Result
+import com.androidera.teachme.models.review.Review
 
 @Database(
-    entities = [Result::class, com.androidera.teachme.models.review.Result::class],
+    entities = [Result::class, Review::class],
     version = 1
 )
 @TypeConverters(Converters::class)

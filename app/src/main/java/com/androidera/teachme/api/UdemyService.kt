@@ -1,7 +1,7 @@
 package com.androidera.teachme.api
 
 import com.androidera.teachme.models.CoursesResponse
-import com.androidera.teachme.models.review.ReviewResponse
+import com.androidera.teachme.models.review.ReviewsResponse
 import com.androidera.teachme.util.Constants.Companion.AUTHORIZATION
 import com.androidera.teachme.util.Constants.Companion.QUERY_PAGE_SIZE
 import retrofit2.Response
@@ -50,5 +50,5 @@ interface UdemyService {
         @Path("course_id") courseId: Int,
         @Query("page") pageNumber: Int = 1,
         @Query("page_size") pageSize: Int = QUERY_PAGE_SIZE
-    ): Response<ReviewResponse>
+    ): Response<ReviewsResponse>
 }

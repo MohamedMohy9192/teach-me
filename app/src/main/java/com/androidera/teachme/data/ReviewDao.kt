@@ -5,14 +5,14 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.androidera.teachme.models.review.Result
+import com.androidera.teachme.models.review.Review
 
 @Dao
 interface ReviewDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertCourseReviews(reviews: List<Result>)
+    suspend fun insertCourseReviews(reviews: List<Review>)
 
     @Query("SELECT * FROM reviews")
-     fun getCourseReviews(): LiveData<List<Result>>
+     fun getCourseReviews(): LiveData<List<Review>>
 }
