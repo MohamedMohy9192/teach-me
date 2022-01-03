@@ -14,7 +14,9 @@
             app:argType="com.androidera.teachme.models.Result" />
         <action
             android:id="@+id/action_coursesDetailFragment_to_reviewsFragment"
-            app:destination="@id/reviewsFragment" />
+            app:destination="@id/reviewsFragment"
+            app:enterAnim="@anim/slide_in_bottom"
+            app:popEnterAnim="@anim/slide_out_bottom" />
     </fragment>
     <fragment
         android:id="@+id/searchCoursesFragment"
