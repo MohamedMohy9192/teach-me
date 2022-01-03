@@ -19,4 +19,7 @@ class UdemyRepository(
     fun getSavedCourses() = coursesDatabase.getCoursesDao().getAllCourses()
 
     suspend fun deleteCourse(course: Result) = coursesDatabase.getCoursesDao().deleteCourse(course)
+
+    suspend fun getCourseReviews(courseId: Int, pageNumber: Int) =
+        RetrofitInstance.udemyApi.getCourseReviews(courseId, pageNumber)
 }

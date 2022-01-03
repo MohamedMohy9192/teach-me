@@ -13,6 +13,7 @@ import androidx.lifecycle.viewModelScope
 import com.androidera.teachme.CoursesApplication
 import com.androidera.teachme.models.CoursesResponse
 import com.androidera.teachme.models.Result
+import com.androidera.teachme.models.review.ReviewsResponse
 import com.androidera.teachme.repository.UdemyRepository
 import com.androidera.teachme.util.Resource
 import kotlinx.coroutines.launch
@@ -36,6 +37,9 @@ class CoursesViewModel(
     var newSearchQuery: String? = null
     var oldSearchQuery: String? = null
 
+    val courseReviews: MutableLiveData<Resource<ReviewsResponse>> = MutableLiveData()
+    var courseReviewsPage = 1
+
     init {
         getCourses("en")
     }
@@ -47,6 +51,15 @@ class CoursesViewModel(
     fun searchCourses(language: String, searchQuery: String) = viewModelScope.launch {
         safeSearchCoursesCall(language, searchQuery)
     }
+
+    fun getCourseReviews(courseId: Int) = viewModelScope.launch {
+        courseReviews.postValue(Resource.Loading())
+        val response = coursesRepository.getCourseReviews(courseId, courseReviewsPage)
+        Log.d(TAG, "Response In ViewModel: getCourseReviews ${response.body()?.next}")
+        courseReviews.postValue(handleCourseReviewsResponses(response))
+
+    }
+
 
     private fun handleCoursesResponse(response: Response<CoursesResponse>): Resource<CoursesResponse> {
         if (response.isSuccessful) {
@@ -82,6 +95,17 @@ class CoursesViewModel(
                 return Resource.Success(searchCoursesResponse ?: resultResponse)
             }
         }
+        return Resource.Error(response.message())
+    }
+
+    private fun handleCourseReviewsResponses(response: Response<ReviewsResponse>): Resource<ReviewsResponse> {
+        if (response.isSuccessful) {
+            response.body()?.let { reviewsResponse ->
+                Log.d(TAG, "Response In ViewModel: handleCourseReviewsResponses ${reviewsResponse.next}")
+                return Resource.Success(reviewsResponse)
+            }
+        }
+
         return Resource.Error(response.message())
     }
 
