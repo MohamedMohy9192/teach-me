@@ -7,4 +7,14 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="salmon">#FF8A65</color>
+    <color name="tuscany">#C75B39</color>
+    <color name="peach_orange">#FFBB93</color>
+
+    <color name="malibu">#6EDAFB</color>
+    <color name="pelorous">#2FA8C8</color>
+    <color name="anakiwa">#A5FFFF</color>
+
+
 </resources>
