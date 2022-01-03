@@ -39,6 +39,7 @@ class CoursesViewModel(
 
     val courseReviews: MutableLiveData<Resource<ReviewsResponse>> = MutableLiveData()
     var courseReviewsPage = 1
+    var courseReviewsResponse: ReviewsResponse? = null
 
     init {
         getCourses("en")
@@ -53,10 +54,7 @@ class CoursesViewModel(
     }
 
     fun getCourseReviews(courseId: Int) = viewModelScope.launch {
-        courseReviews.postValue(Resource.Loading())
-        val response = coursesRepository.getCourseReviews(courseId, courseReviewsPage)
-        Log.d(TAG, "Response In ViewModel: getCourseReviews ${response.body()?.next}")
-        courseReviews.postValue(handleCourseReviewsResponses(response))
+        safeGetCourseReviewsCall(courseId)
 
     }
 
@@ -101,8 +99,19 @@ class CoursesViewModel(
     private fun handleCourseReviewsResponses(response: Response<ReviewsResponse>): Resource<ReviewsResponse> {
         if (response.isSuccessful) {
             response.body()?.let { reviewsResponse ->
-                Log.d(TAG, "Response In ViewModel: handleCourseReviewsResponses ${reviewsResponse.next}")
-                return Resource.Success(reviewsResponse)
+                courseReviewsPage++
+                if (courseReviewsResponse == null) {
+                    courseReviewsResponse = reviewsResponse
+                } else {
+                    val oldReviews = courseReviewsResponse?.reviews
+                    val newReviews = reviewsResponse.reviews
+                    oldReviews?.addAll(newReviews)
+                }
+                Log.d(
+                    TAG,
+                    "Response In ViewModel: handleCourseReviewsResponses ${reviewsResponse.next}"
+                )
+                return Resource.Success(courseReviewsResponse ?: reviewsResponse)
             }
         }
 
@@ -152,6 +161,23 @@ class CoursesViewModel(
             when (t) {
                 is IOException -> searchCourses.postValue(Resource.Error("Network Failure"))
                 else -> searchCourses.postValue(Resource.Error("Conversion Error"))
+            }
+        }
+    }
+
+    private suspend fun safeGetCourseReviewsCall(courseId: Int) {
+        courseReviews.postValue(Resource.Loading())
+        try {
+            if (hasInternetConnection()) {
+                val response = coursesRepository.getCourseReviews(courseId, courseReviewsPage)
+                courseReviews.postValue(handleCourseReviewsResponses(response))
+            } else {
+                courseReviews.postValue(Resource.Error("No internet connection"))
+            }
+        } catch (t: Throwable) {
+            when (t) {
+                is IOException -> courseReviews.postValue(Resource.Error("Network Failure"))
+                else -> courseReviews.postValue(Resource.Error("Conversion Error"))
             }
         }
     }
