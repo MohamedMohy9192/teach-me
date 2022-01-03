@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.androidera.teachme.R
 import com.androidera.teachme.databinding.FragmentCoursesDetailBinding
@@ -59,5 +60,16 @@ class CoursesDetailFragment : Fragment() {
 
         }
 
+        binding.openCoursesReviewsFragmentButton.setOnClickListener {
+            val action =
+                CoursesDetailFragmentDirections.actionCoursesDetailFragmentToReviewsFragment(course.id)
+            findNavController().navigate(action)
+        }
+
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

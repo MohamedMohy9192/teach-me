@@ -8,7 +8,7 @@ class Constants {
         const val BASE_URL = "https://www.udemy.com/api-2.0/"
         const val SEARCH_COURSES_TIME_DELAY = 500L
         const val COURSE_BUNDLE_KEY = "course"
-        const val COURSE_URL_KEY = "course_url"
+        const val COURSE_ID_KEY = "course_id"
         const val UDEMY_BASE_URL = "https://www.udemy.com"
         const val QUERY_PAGE_SIZE = 12
     }

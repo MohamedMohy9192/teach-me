@@ -21,13 +21,23 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="32dp"
                 android:text="@string/view_on_udemy"
                 app:icon="@drawable/ic_baseline_public_24"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/instructor_image_view" />
 
+
+            <Button
+                android:id="@+id/open_courses_reviews_fragment_button"
+                style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/show_course_reviews"
+                app:icon="@drawable/ic_baseline_rate_review_24"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/open_courses_view_fragment_button" />
 
             <ImageView
                 android:id="@+id/course_image"
