@@ -20,6 +20,7 @@ App displaying Udemy courses using [Udemy API](https://www.udemy.com/developers/
 - [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
 - [LiveData](https://developer.android.com/topic/libraries/architecture/livedata)
 - [View Binding](https://developer.android.com/topic/libraries/view-binding)
+- [Pagination](https://developer.android.com/topic/libraries/architecture/paging/v3-overview)
 - [MVVM Architecture](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel)
 
 ## Screenshots
