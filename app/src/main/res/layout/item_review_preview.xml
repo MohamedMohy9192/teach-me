@@ -15,10 +15,11 @@
 
         <ImageView
             android:id="@+id/user_image_view"
-            android:layout_width="50dp"
+            android:layout_width="0dp"
             android:layout_height="0dp"
             android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="@+id/review_ratting_bar"
+            app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/user_image_placeholder" />
