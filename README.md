@@ -4,10 +4,11 @@ App displaying Udemy courses using [Udemy API](https://www.udemy.com/developers/
 
 ## Features
 
-- Display Udemy courses and allow users to scroll with pagination.
-- Show detailed information about each course.
-- Allow users to search their desired courses using any search input
-- Save users favorites courses on the local device
+- Display Udemy courses allowing users to browse and explore them.
+- Display detailed information about each course.
+- Search and display courses matching the search word inputs.
+- Save favorite courses on the local devices.
+- View the rating and comments of others on each course.
 
 ## Libraries
 
